@@ -1,8 +1,7 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-//  var now  = dayjs()
-//  console.log(now);
+
 
 $(function () {
   //Save funtionality
@@ -16,18 +15,31 @@ $(function () {
   });
   
   $(".time-block").each(function(){
-    // conditional statements for the past / present/ future css class
     // get hour from div
-    // get current hour from day js
-    // compare the value down below
-   //if() {
+    const timeBlock = $(this);
+    const hour = timeBlock.attr("id").split("-").pop();
     
-   // }else if () {
-
-   // }else {
-
-    //}
-
+    // conditional statements for the past / present/ future css class
+    // compare the value down below
+    
+    // get current hour from day js
+    const currentHour = dayjs().hour(); 
+    if (hour < currentHour ) { 
+      $(this).addClass("past"); 
+      $(this).removeClass("present");
+      $(this).removeClass("future");
+      
+    }else if (hour == currentHour) {
+      $(this).removeClass("past"); 
+      $(this).addClass("present");
+      $(this).removeClass("future");
+      
+    } else {
+      $(this).removeClass("past"); 
+      $(this).removeClass("present");
+      $(this).addClass("future");
+    }
+    
     //retrieving the values
     const id = $(this).attr("id");
     const val = localStorage.getItem(id) 
@@ -44,34 +56,19 @@ $(function () {
   // current hour in 24-hour time?
   // loop over each time block
 
-  const today = dayjs();
-  const currentHour = parseInt(today.format("H"));
-  console.log(currentHour);
-  $(".time-block").each(function () {
-    const timeblock = $(this);
-    const hour = timeblock
-    // hour-9
-    .attr("id")
-    // ['hour','9']
-    .split("-")
-    //returns 9
-    .pop(); 
-  })
-  //
+
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
   
- //current day----------------------
+  
  
 
 });
 
 const now = dayjs();
-const currentDay = now.format('dddd');
+const currentDate = now.format('MMMM D, YYYY');
 const currentTime = now.format('h:mm A');
 
-document.getElementById('current-day').textContent = currentDay;
+document.getElementById('current-date').textContent = currentDate;
 document.getElementById('current-time').textContent = currentTime;
