@@ -25,13 +25,10 @@ $(function () {
     //and we use "pop" to extract the last value. "hour-9" -> "hour, 9" -> "9"
     const currentHour = dayjs().hour(); 
     //we create a class for current hour, we first use dayjs to pull current time and then specify we nee the hour 
-    const id = $(this).attr("id");
+    //the following lines are for extracting and saving the text added by the user.
+    
 
-    const val = localStorage.getItem(id)
-
-    $(this).children("textarea").eq(0).val(val);
-
-    console.log(this);
+    
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
@@ -55,15 +52,26 @@ $(function () {
       //in this section we add the class of future if we are outside of our window we defined.
     }
     
-  });
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
+    const id = $(this).attr("id");
+    //the above line is used to extract the id from the .time-block
+    const val = localStorage.getItem(id)
+    //the above line pulls the value from local storage
+    $(this).children("textarea").eq(0).val(val);
+    //the above line pulls the usser added information from local storage 
+    console.log(this);
+    // allows the outputs to be seen in developer tools
+
+    });
+   
   });
 
 const now = dayjs();
 const currentDate = now.format('MMMM D, YYYY');
 const currentTime = now.format('h:mm A');
-
+// on the group above, we create the element of "now" to equal the current time off of dayjs.
+//using the dayjs value we create two seperate elements, one for date and another for time, 
+//we can also  modify the format depending on our preference.
 document.getElementById('current-date').textContent = currentDate;
 document.getElementById('current-time').textContent = currentTime;
+//once we have the values of the time and the date, we can target an element line and add a value. in this case we target an element the its id.
+//and we equal its value to the time or date function.
