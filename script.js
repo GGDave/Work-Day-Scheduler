@@ -61,9 +61,9 @@ $(function () {
     console.log(this);
     // allows the outputs to be seen in developer tools
 
-    });
-   
   });
+   
+});
 
 const now = dayjs();
 const currentDate = now.format('MMMM D, YYYY');
