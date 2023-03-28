@@ -25,12 +25,18 @@ $(function () {
     //and we use "pop" to extract the last value. "hour-9" -> "hour, 9" -> "9"
     const currentHour = dayjs().hour(); 
     //we create a class for current hour, we first use dayjs to pull current time and then specify we nee the hour 
+    const id = $(this).attr("id");
 
+    const val = localStorage.getItem(id)
+
+    $(this).children("textarea").eq(0).val(val);
+
+    console.log(this);
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes?
-
+    
     if (hour < currentHour ) {  
       $(this).addClass("past"); 
       $(this).removeClass("present");
@@ -49,24 +55,11 @@ $(function () {
       //in this section we add the class of future if we are outside of our window we defined.
     }
     
-    //retrieving the values
-    const id = $(this).attr("id");
-    const val = localStorage.getItem(id) 
-    $(this).children("textarea").eq(0).val(val);
-    console.log(this);
   });
-
-
-
-
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  
-  
- 
-
-});
+  });
 
 const now = dayjs();
 const currentDate = now.format('MMMM D, YYYY');
