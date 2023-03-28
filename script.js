@@ -1,43 +1,52 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-
-
 $(function () {
-  //Save funtionality
+  //Saving the users added text
   $(".saveBtn").on("click", function () {
-   // save the users information
-   // get the text out of our text area
+   //this is the event listener, stating that on "click" the following functions will occur.
     const val = $(this).siblings("textarea").eq(0).val();
+   //in the above line, "this" refers to the .saveBtn and we are pulling the user added information by using the 
+   //.siblings which is a sibing to the save button.  
     const id = $(this).parent().attr("id");
+  //in the above line, we are stating that we want the "id" that is in the parent element 
     console.log(id, val) 
+  // by using console log we can view the values of id and val in the developer tools
     localStorage.setItem(id, val) 
+  //the above line is used to store the values in the browsers storage.
   });
   
   $(".time-block").each(function(){
-    // get hour from div
+    // the above lines are targeting all the .timeblock elements and executing the specified functions for each element found.
     const timeBlock = $(this);
+    //"this" refers to ".timeBlock" and the function is ran to all elements found and the value here is save to the tag "timeblock" 
     const hour = timeBlock.attr("id").split("-").pop();
-    
-    // conditional statements for the past / present/ future css class
-    // compare the value down below
-    
-    // get current hour from day js
+    //in this line we are getting the value of timeblock, pulling the parent id, and because there is a "-" we remove it by  using .split
+    //and we use "pop" to extract the last value. "hour-9" -> "hour, 9" -> "9"
     const currentHour = dayjs().hour(); 
-    if (hour < currentHour ) { 
+    //we create a class for current hour, we first use dayjs to pull current time and then specify we nee the hour 
+
+    // TODO: Add code to apply the past, present, or future class to each time
+    // block by comparing the id to the current hour. HINTS: How can the id
+    // attribute of each time-block be used to conditionally add or remove the
+    // past, present, and future classes?
+
+    if (hour < currentHour ) {  
       $(this).addClass("past"); 
       $(this).removeClass("present");
       $(this).removeClass("future");
-      
+      //in the above logic, we state that if the "hour" that we got from the id, is less than the current time reffrenced from dayjs
+      // then the following classes will be applied or removed, and are defined in the css page.   
     }else if (hour == currentHour) {
       $(this).removeClass("past"); 
       $(this).addClass("present");
       $(this).removeClass("future");
-      
+      //in this section if the hour in the id matches the current hour, we add the class of present 
     } else {
       $(this).removeClass("past"); 
       $(this).removeClass("present");
       $(this).addClass("future");
+      //in this section we add the class of future if we are outside of our window we defined.
     }
     
     //retrieving the values
@@ -48,13 +57,6 @@ $(function () {
   });
 
 
-  // --TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes?
-  // --How can Day.js be used to get the
-  // current hour in 24-hour time?
-  // loop over each time block
 
 
   // TODO: Add code to get any user input that was saved in localStorage and set
